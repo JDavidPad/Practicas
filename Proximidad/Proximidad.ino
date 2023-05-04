@@ -7,22 +7,22 @@ Alumno: Josué David Padilla Morataya
 Seccion: A
 Carne: 2022074
 */
-#include <Wire.h>    //Liberias para usar el protocolo i2c
-#include <LiquidCrystal_I2C.h>  //Libreria que controla la LCD por medio de I2C
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 #define direccion_lcd 0x27
 #define filas 2
 #define columnas 16
-#define trigger A2
-#define echo A1
+#define trigger A1
+#define echo A2
 #define alarm A0
 int dis;
 int i;
-long tim; 
+long tim;
 LiquidCrystal_I2C LCD_Padilla(direccion_lcd, columnas, filas);
 void setup()
 {
 Serial.begin(9600);
-for(i=2; i<=11;i++){
+for(i=2; i<12;i++){
 pinMode(i, OUTPUT);
 }
 pinMode(alarm ,OUTPUT);
@@ -51,7 +51,7 @@ if( dis > 45){
 LCD_Padilla.setCursor(0,0);
 LCD_Padilla.print("FUERA DE ALCANCE");
 LCD_Padilla.setCursor(0,1);
-LCD_Padilla.print("");
+LCD_Padilla.print("                       ");
 digitalWrite(2, LOW);
 digitalWrite(3, LOW);
 digitalWrite(4, LOW);
@@ -83,9 +83,9 @@ digitalWrite(alarm, LOW);
 }
 if( dis < 30 && dis > 15){
 LCD_Padilla.setCursor(0,0);
-LCD_Padilla.print("   Cuidado,  ");
+LCD_Padilla.print("    Cuidado,     ");
 LCD_Padilla.setCursor(0,1);
-LCD_Padilla.print("Espacio Privado");
+LCD_Padilla.print("Espacio  Privado");
 digitalWrite(2, LOW);
 digitalWrite(3, LOW);
 digitalWrite(4, LOW);
@@ -102,9 +102,9 @@ digitalWrite(alarm, LOW);
 }   
 if( dis < 15 && dis > 0){
 LCD_Padilla.setCursor(0,0);
-LCD_Padilla.print(" Invadiendo  ");
+LCD_Padilla.print("   Invadiendo   ");
 LCD_Padilla.setCursor(0,1);
-LCD_Padilla.print("Espacio Privado");
+LCD_Padilla.print("Espacio  Privado");
 digitalWrite(2, HIGH);
 digitalWrite(3, HIGH);
 digitalWrite(4, HIGH);
